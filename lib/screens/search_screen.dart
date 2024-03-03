@@ -218,7 +218,6 @@ class SearchTile extends StatelessWidget {
           Container(
             width: 139.w,
             height: 138.h,
-            child: Image.asset(imageUrl),
             decoration: const ShapeDecoration(
               shape: RoundedRectangleBorder(
                 side: BorderSide(
@@ -232,6 +231,7 @@ class SearchTile extends StatelessWidget {
                 ),
               ),
             ),
+            child: Image.asset(imageUrl),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),

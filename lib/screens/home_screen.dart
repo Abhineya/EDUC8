@@ -7,11 +7,10 @@ import 'package:educ8/screens/profile_screen.dart';
 import 'package:educ8/screens/projects_screen.dart';
 import 'package:educ8/screens/search_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -23,11 +22,11 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _children = [
     // This is incorrect, you should add instances of different screens here
 
-    PostScreen(),
-    SearchScreen(),
+    const PostScreen(),
+    const SearchScreen(),
     CameraScreen(),
-    SearchScreen(),
-    ProfileScreen()
+    const SearchScreen(),
+    const ProfileScreen()
   ];
 
   @override
@@ -204,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return CategoriesScreen();
+                        return const CategoriesScreen();
                       }));
                     },
                     leading: const Text(

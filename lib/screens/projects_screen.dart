@@ -57,11 +57,11 @@ class _ProjectsScreenState extends State<ProjectsScreen>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TabBar(
-              indicatorColor: Color(0xFFEFF2F4),
+              indicatorColor: const Color(0xFFEFF2F4),
               dividerColor: Colors.transparent,
               unselectedLabelColor: const Color(0xff8F8E8E),
               labelStyle: TextStyle(
-                color: Color(0xFF111416),
+                color: const Color(0xFF111416),
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w700,
                 // letterSpacing: 0.21,
@@ -97,11 +97,11 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                                 width: 48.w,
                                 height: 48.h,
                                 decoration: ShapeDecoration(
-                                  color: Color(0xFFEFF2F4),
+                                  color: const Color(0xFFEFF2F4),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8)),
                                 ),
-                                child: Icon(Icons.add_circle_outline_rounded),
+                                child: const Icon(Icons.add_circle_outline_rounded),
                               ),
                               SizedBox(
                                 width: 20.w,
@@ -114,7 +114,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                                   Text(
                                     'Post a project',
                                     style: TextStyle(
-                                      color: Color(0xFF111416),
+                                      color: const Color(0xFF111416),
                                       fontSize: 16.sp,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -122,7 +122,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                                   Text(
                                     'Share your project and get it done',
                                     style: TextStyle(
-                                      color: Color(0xFF637787),
+                                      color: const Color(0xFF637787),
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
                                     ),
@@ -137,7 +137,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                           SizedBox(
                             height: 20.h,
                           ),
-                          ProjectTile(
+                          const ProjectTile(
                             imageUrl: 'assets/images/design.png',
                             name: 'Design a logo for my new company',
                             text1: 'Up to \$500',
@@ -146,7 +146,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                           SizedBox(
                             height: 20.h,
                           ),
-                          ProjectTile(
+                          const ProjectTile(
                             imageUrl: 'assets/images/website.png',
                             name: 'I need a website built for my business',
                             text1: 'Up to \$750',
@@ -155,7 +155,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                           SizedBox(
                             height: 20.h,
                           ),
-                          ProjectTile(
+                          const ProjectTile(
                             imageUrl: 'assets/images/design.png',
                             name: 'Design a logo for my new company',
                             text1: 'Up to \$500',
@@ -220,7 +220,7 @@ class ProjectTile extends StatelessWidget {
           Text(
             name,
             style: TextStyle(
-              color: Color(0xFF111416),
+              color: const Color(0xFF111416),
               fontSize: 18.sp,
               fontWeight: FontWeight.w700,
               letterSpacing: -0.27,
@@ -235,7 +235,7 @@ class ProjectTile extends StatelessWidget {
                   Text(
                     text1,
                     style: TextStyle(
-                      color: Color(0xFF637787),
+                      color: const Color(0xFF637787),
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w400,
                     ),
@@ -243,7 +243,7 @@ class ProjectTile extends StatelessWidget {
                   Text(
                     text2,
                     style: TextStyle(
-                      color: Color(0xFF637787),
+                      color: const Color(0xFF637787),
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w400,
                     ),
@@ -257,7 +257,7 @@ class ProjectTile extends StatelessWidget {
                         EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
                     height: 32.h,
                     decoration: BoxDecoration(
-                        color: Color(0xFF2193DD),
+                        color: const Color(0xFF2193DD),
                         borderRadius: BorderRadius.circular(10.r)),
                     child: Center(
                       child: Text(

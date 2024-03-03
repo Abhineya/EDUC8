@@ -1,11 +1,15 @@
-import 'package:educ8/screens/categories_screen.dart';
-import 'package:educ8/screens/home_screen.dart';
-import 'package:educ8/screens/lecture_screen.dart';
-import 'package:educ8/screens/projects_screen.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:educ8/screens/categories_screen.dart';
+import 'package:educ8/screens/home_screen.dart';
+import 'package:educ8/screens/lecture_screen.dart';
+import 'package:educ8/screens/projects_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -39,9 +43,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               centerTitle: true,
               leading: GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.of(context)
+                      .pushReplacement(MaterialPageRoute(builder: (_) {
+                    return const HomeScreen();
+                  }));
                 },
-                child: const Icon(Icons.arrow_back_ios_new_rounded),
+                child: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: Colors.transparent,
+                ),
               ),
               // leading: GestureDetector(
               //     onTap: () {
@@ -225,7 +235,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     IconButton(
-                      icon: Icon(Icons.edit),
+                      icon: const Icon(Icons.edit),
                       onPressed: () {
                         setState(() {
                           _isEditing = !_isEditing;
@@ -252,15 +262,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 SizedBox(
                   height: 15.h,
                 ),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SocialMediaTile(imgUrl: 'assets/images/facebookb.png'),
-                    SocialMediaTile(imgUrl: 'assets/images/linkedin.png'),
-                    SocialMediaTile(imgUrl: 'assets/images/dribble.png'),
-                    SocialMediaTile(imgUrl: 'assets/images/insta.png'),
-                    SocialMediaTile(imgUrl: 'assets/images/youtube.png'),
-                    SocialMediaTile(imgUrl: 'assets/images/link.png'),
+                    SocialMediaTile(
+                      imgUrl: 'assets/images/facebookb.png',
+                      link: 'https://www.behance.net/raunakjha4',
+                    ),
+                    SocialMediaTile(
+                      imgUrl: 'assets/images/linkedin.png',
+                      link: 'https://www.linkedin.com/in/raunak-jha-64b890222/',
+                    ),
+                    SocialMediaTile(
+                      imgUrl: 'assets/images/dribble.png',
+                      link:
+                          'https://twitter.com/Raunakhumai?t=IxmK7IHz5zWBZT22LNzHxw&s=09',
+                    ),
+                    SocialMediaTile(
+                      imgUrl: 'assets/images/insta.png',
+                      link:
+                          'https://www.instagram.com/not_raunakk?igsh=MWlwYjludzNjdmE2Ng==',
+                    ),
+                    SocialMediaTile(
+                      imgUrl: 'assets/images/youtube.png',
+                      link: '',
+                    ),
+                    SocialMediaTile(
+                      imgUrl: 'assets/images/link.png',
+                      link: '',
+                    ),
                   ],
                 ),
                 SizedBox(
@@ -360,7 +390,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Material(
                       child: Container(
                         width: 366.w,
-                        height: 115.h,
+                        // height: 115.h,
                         decoration: ShapeDecoration(
                           shape: RoundedRectangleBorder(
                             side: const BorderSide(
@@ -370,7 +400,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         padding: EdgeInsets.all(5.h),
                         child: TextField(
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                           ),
                           controller: bioController,
@@ -391,7 +421,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
-                              Color(0xFF547CAB)),
+                              const Color(0xFF547CAB)),
                         ),
                         onPressed: () {
                           setState(() {
@@ -399,7 +429,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 false; // Stop editing when the button is pressed
                           });
                         },
-                        child: Text(
+                        child: const Text(
                           'Save',
                           style: TextStyle(color: Colors.white),
                         ),
@@ -519,6 +549,7 @@ class ProfileTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.all(2.h),
         width: double.infinity,
         height: 40.h,
         decoration: ShapeDecoration(
@@ -554,24 +585,35 @@ class ProfileTile extends StatelessWidget {
 
 class SocialMediaTile extends StatelessWidget {
   final String imgUrl;
-  const SocialMediaTile({super.key, required this.imgUrl});
+  final String link;
+
+  SocialMediaTile({
+    Key? key,
+    required this.imgUrl,
+    required this.link,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: 30,
-        height: 30,
-        decoration: ShapeDecoration(
-          color: const Color(0xFFF9FAFC),
-          shape: RoundedRectangleBorder(
-            side: BorderSide(
-              width: 0.62.w,
-              strokeAlign: BorderSide.strokeAlignOutside,
-              color: const Color(0xFFE3E3E3),
+    return GestureDetector(
+      onTap: () {
+        launchUrl(Uri.parse(link));
+      },
+      child: Container(
+          width: 30,
+          height: 30,
+          decoration: ShapeDecoration(
+            color: const Color(0xFFF9FAFC),
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                width: 0.62.w,
+                strokeAlign: BorderSide.strokeAlignOutside,
+                color: const Color(0xFFE3E3E3),
+              ),
+              borderRadius: BorderRadius.circular(2.50.r),
             ),
-            borderRadius: BorderRadius.circular(2.50.r),
           ),
-        ),
-        child: Image.asset(imgUrl));
+          child: Image.asset(imgUrl)),
+    );
   }
 }

@@ -31,7 +31,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 width: double.infinity.w,
                 height: 50.h,
                 decoration: ShapeDecoration(
-                  color: Color(0xFFE8EDF4),
+                  color: const Color(0xFFE8EDF4),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.68),
                   ),
@@ -70,19 +70,19 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  CreatorTile(
+                  const CreatorTile(
                       imageUrl: 'assets/images/chemistry.png',
                       title: 'Chemistry'),
                   SizedBox(
                     width: 20.w,
                   ),
-                  CreatorTile(
+                  const CreatorTile(
                       imageUrl: 'assets/images/maths.png',
                       title: 'Mathematics'),
                   SizedBox(
                     width: 20.w,
                   ),
-                  CreatorTile(
+                  const CreatorTile(
                       imageUrl: 'assets/images/chemistry.png',
                       title: 'Chemistry'),
                   SizedBox(
@@ -108,7 +108,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: LectureTile(
+              child: const LectureTile(
                 imageUrl: 'assets/images/andrew.png',
                 name: 'Professor Andrew Ng',
                 text1: 'Stanford University',
@@ -120,7 +120,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: LectureTile(
+              child: const LectureTile(
                 imageUrl: 'assets/images/robert.png',
                 name: 'Professor Robert Sapolsky',
                 text1: 'Stanford University',
@@ -145,7 +145,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             SizedBox(
               height: 20.h,
             ),
-            Center(
+            const Center(
               child: PlatformTile(
                 imageUrl: 'assets/images/science.png',
                 title: 'The science of well-being',
@@ -155,7 +155,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             SizedBox(
               height: 30.h,
             ),
-            Center(
+            const Center(
               child: PlatformTile(
                 imageUrl: 'assets/images/modern.png',
                 title: 'Modern and contemporary art',
@@ -170,7 +170,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               
                 setState(() {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return  LoginScreen();
+                    return  const LoginScreen();
                   }));
                 });
               },
@@ -180,7 +180,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 height: 48.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    color: Color(0xFF2193DD),
+                    color: const Color(0xFF2193DD),
                     borderRadius: BorderRadius.circular(15.r)),
                 child: Center(
                   child: Text(
@@ -297,7 +297,7 @@ class LectureTile extends StatelessWidget {
           Text(
             name,
             style: TextStyle(
-              color: Color(0xFF111416),
+              color: const Color(0xFF111416),
               fontSize: 18.sp,
               fontWeight: FontWeight.w700,
               letterSpacing: -0.27,
@@ -313,7 +313,7 @@ class LectureTile extends StatelessWidget {
                   Text(
                     text1,
                     style: TextStyle(
-                      color: Color(0xFF637787),
+                      color: const Color(0xFF637787),
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w400,
                     ),
@@ -321,7 +321,7 @@ class LectureTile extends StatelessWidget {
                   Text(
                     text2,
                     style: TextStyle(
-                      color: Color(0xFF637787),
+                      color: const Color(0xFF637787),
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w400,
                     ),
@@ -335,7 +335,7 @@ class LectureTile extends StatelessWidget {
                         EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
                     height: 32.h,
                     decoration: BoxDecoration(
-                        color: Color(0xFF2193DD),
+                        color: const Color(0xFF2193DD),
                         borderRadius: BorderRadius.circular(10.r)),
                     child: Center(
                       child: Text(
@@ -375,12 +375,12 @@ class PlatformTile extends StatelessWidget {
       width: 358.w,
       height: 125.h,
       decoration: ShapeDecoration(
-        color: Color(0xFFF7F9FC),
+        color: const Color(0xFFF7F9FC),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
         shadows: [
-          BoxShadow(
+          const BoxShadow(
             color: Color(0x19000000),
             blurRadius: 4,
             offset: Offset(0, 0),
@@ -399,7 +399,7 @@ class PlatformTile extends StatelessWidget {
                 child: Text(
                   title,
                   style: TextStyle(
-                    color: Color(0xFF0C141C),
+                    color: const Color(0xFF0C141C),
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
                   ),
@@ -409,7 +409,7 @@ class PlatformTile extends StatelessWidget {
                 child: Text(
                   title1,
                   style: TextStyle(
-                    color: Color(0xFF49779B),
+                    color: const Color(0xFF49779B),
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                   ),
@@ -419,7 +419,7 @@ class PlatformTile extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
                 height: 32.h,
                 decoration: BoxDecoration(
-                    color: Color(0xFFE8EDF4),
+                    color: const Color(0xFFE8EDF4),
                     borderRadius: BorderRadius.circular(10.r)),
                 child: Center(
                   child: Text(
