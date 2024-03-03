@@ -41,6 +41,8 @@ dependencies:
   firebase_core: ^2.25.4
   firebase_auth: ^4.17.5
   camera: ^0.10.5+9
+  google_sign_in: ^6.2.1
+  shared_preferences: ^2.0.8
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PostScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class _PostScreenState extends State<PostScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const MyFeedCard(
+              MyFeedCard(
                 title: 'Raunak Jha',
                 imageUrl: 'assets/images/raunakpost.png',
                 profileimageUrl: 'assets/images/raunak.png',
@@ -25,7 +26,7 @@ class _PostScreenState extends State<PostScreen> {
               SizedBox(
                 height: 20.h,
               ),
-              const MyFeedCard(
+              MyFeedCard(
                 title: 'Apurva Ambulkar',
                 imageUrl: 'assets/images/apurvapost.png',
                 profileimageUrl: 'assets/images/apurva.png',
@@ -41,16 +42,24 @@ class _PostScreenState extends State<PostScreen> {
   }
 }
 
-class MyFeedCard extends StatelessWidget {
+class MyFeedCard extends StatefulWidget {
   final String title;
   final String imageUrl;
   final String profileimageUrl;
 
-  const MyFeedCard(
+  MyFeedCard(
       {super.key,
       required this.title,
       required this.imageUrl,
       required this.profileimageUrl});
+
+  @override
+  State<MyFeedCard> createState() => _MyFeedCardState();
+}
+
+class _MyFeedCardState extends State<MyFeedCard> {
+  bool _isLiked = false; // Define _isLiked variable here
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -71,13 +80,13 @@ class MyFeedCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 22.5.r,
-                  child: Image.asset(profileimageUrl),
+                  child: Image.asset(widget.profileimageUrl),
                 ),
                 SizedBox(
                   width: 10.w,
                 ),
                 Text(
-                  title,
+                  widget.title,
                   style: TextStyle(
                     color: const Color(0xFF363636),
                     fontSize: 20.sp,
@@ -92,7 +101,7 @@ class MyFeedCard extends StatelessWidget {
           SizedBox(
             width: 382.w,
             height: 233.h,
-            child: Image.asset(imageUrl),
+            child: Image.asset(widget.imageUrl),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
@@ -103,10 +112,17 @@ class MyFeedCard extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Icon(
-                      Icons.thumb_up_outlined,
-                      color: const Color(0xff557DAB),
-                      size: 24.h,
+                    GestureDetector(
+                      child: Icon(
+                        _isLiked ? Icons.favorite : Icons.favorite_border,
+                        size: 24.h,
+                        color: const Color(0xFF547CAB),
+                      ),
+                      onTap: () {
+                        setState(() {
+                          _isLiked = !_isLiked;
+                        });
+                      },
                     ),
                     Text(
                       'Like',

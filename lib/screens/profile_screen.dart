@@ -3,6 +3,7 @@ import 'package:educ8/screens/home_screen.dart';
 import 'package:educ8/screens/lecture_screen.dart';
 import 'package:educ8/screens/projects_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,6 +15,11 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  bool _isEditing = false;
+  final bioController = TextEditingController(
+      text:
+          'Meet Raunak, a talented freelancer providing digital services to clients all over the world. With over 5 years of experience in the industry, John has developed a deep understanding of what it takes to help businesses succeed online.');
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -31,7 +37,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               centerTitle: true,
-              leading: const Icon(Icons.arrow_back_ios_new_rounded),
+              leading: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: const Icon(Icons.arrow_back_ios_new_rounded),
+              ),
+              // leading: GestureDetector(
+              //     onTap: () {
+              //       Navigator.push(context,
+              //           MaterialPageRoute(builder: (context) {
+              //         return const HomeScreen();
+              //       }));
+              //     },
+              //     child: const Icon(Icons.arrow_back_ios_new_rounded)),
               title: Text(
                 'Raunak Jha',
                 textAlign: TextAlign.center,
@@ -191,25 +210,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 SizedBox(
                   height: 10.h,
                 ),
-                Text(
-                  'Raunak Jha',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Material(
+                      child: Text(
+                        'Raunak Jha',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.edit),
+                      onPressed: () {
+                        setState(() {
+                          _isEditing = !_isEditing;
+                          // Enable editing when the button is pressed
+                        });
+                      },
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 5.h,
                 ),
-                Text(
-                  'Product Designer/Developer',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: const Color(0xFF78787A),
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
+                Material(
+                  child: Text(
+                    'Product Designer/Developer',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: const Color(0xFF78787A),
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -232,77 +269,83 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      width: 122.w,
-                      height: 40.h,
-                      decoration: ShapeDecoration(
-                        color: const Color(0xFFE8ECF9),
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            width: 1,
-                            strokeAlign: BorderSide.strokeAlignOutside,
-                            color: Color(0xFFE3E3E3),
-                          ),
-                          borderRadius: BorderRadius.circular(6.r),
-                        ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'About me',
-                          style: TextStyle(
-                            color: const Color(0xFF547CAB),
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500,
+                    Material(
+                      child: Container(
+                        width: 122.w,
+                        height: 40.h,
+                        decoration: ShapeDecoration(
+                          color: const Color(0xFFE8ECF9),
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                              width: 1,
+                              strokeAlign: BorderSide.strokeAlignOutside,
+                              color: Color(0xFFE3E3E3),
+                            ),
+                            borderRadius: BorderRadius.circular(6.r),
                           ),
                         ),
-                      ),
-                    ),
-                    Container(
-                      width: 122.w,
-                      height: 40.h,
-                      decoration: ShapeDecoration(
-                        color: const Color(0xFFE8ECF9),
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            width: 1,
-                            strokeAlign: BorderSide.strokeAlignOutside,
-                            color: Color(0xFFE3E3E3),
-                          ),
-                          borderRadius: BorderRadius.circular(6.r),
-                        ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Content',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500,
+                        child: Center(
+                          child: Text(
+                            'About me',
+                            style: TextStyle(
+                              color: const Color(0xFF547CAB),
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                    Container(
-                      width: 122.w,
-                      height: 40.h,
-                      decoration: ShapeDecoration(
-                        color: const Color(0xFFE8ECF9),
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            width: 1,
-                            strokeAlign: BorderSide.strokeAlignOutside,
-                            color: Color(0xFFE3E3E3),
+                    Material(
+                      child: Container(
+                        width: 122.w,
+                        height: 40.h,
+                        decoration: ShapeDecoration(
+                          color: const Color(0xFFE8ECF9),
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                              width: 1,
+                              strokeAlign: BorderSide.strokeAlignOutside,
+                              color: Color(0xFFE3E3E3),
+                            ),
+                            borderRadius: BorderRadius.circular(6.r),
                           ),
-                          borderRadius: BorderRadius.circular(6.r),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Content',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                         ),
                       ),
-                      child: Center(
-                        child: Text(
-                          'Reviews',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500,
+                    ),
+                    Material(
+                      child: Container(
+                        width: 122.w,
+                        height: 40.h,
+                        decoration: ShapeDecoration(
+                          color: const Color(0xFFE8ECF9),
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                              width: 1,
+                              strokeAlign: BorderSide.strokeAlignOutside,
+                              color: Color(0xFFE3E3E3),
+                            ),
+                            borderRadius: BorderRadius.circular(6.r),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Reviews',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
                       ),
@@ -312,113 +355,154 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 SizedBox(
                   height: 20.h,
                 ),
-                Container(
-                  width: 366.w,
-                  height: 115.h,
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      side:
-                          const BorderSide(width: 1, color: Color(0xFFE3E3E3)),
-                      borderRadius: BorderRadius.circular(12),
+                Column(
+                  children: [
+                    Material(
+                      child: Container(
+                        width: 366.w,
+                        height: 115.h,
+                        decoration: ShapeDecoration(
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                                width: 1, color: Color(0xFFE3E3E3)),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        padding: EdgeInsets.all(5.h),
+                        child: TextField(
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                          ),
+                          controller: bioController,
+                          style: TextStyle(
+                            color: const Color(0xFF373737),
+                            fontSize: 15.sp,
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w400,
+                          ),
+                          maxLines:
+                              null, // Allows the TextField to expand as the user types
+                          enabled:
+                              _isEditing, // TextField is editable only when _isEditing is true
+                        ),
+                      ),
                     ),
-                  ),
-                  padding: EdgeInsets.all(5.h),
+                    if (_isEditing) // Show the button only when _isEditing is true
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Color(0xFF547CAB)),
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _isEditing =
+                                false; // Stop editing when the button is pressed
+                          });
+                        },
+                        child: Text(
+                          'Save',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Material(
                   child: Text(
-                    'Meet Raunak, a talented freelancer providing digital services to clients all over the world. With over 5 years of experience in the industry, John has developed a deep understanding of what it takes to help businesses succeed online.',
+                    'I can help with',
                     style: TextStyle(
-                      color: const Color(0xFF373737),
-                      fontSize: 15.sp,
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w400,
-                      // height: 0,
+                      color: const Color(0xFF353539),
+                      fontSize: 22.sp,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
                 SizedBox(
                   height: 20.h,
                 ),
-                Text(
-                  'I can help with',
-                  style: TextStyle(
-                    color: const Color(0xFF353539),
-                    fontSize: 22.sp,
-                    fontWeight: FontWeight.w600,
+                Material(
+                  child: GestureDetector(
+                    child: const ProfileTile(title: 'Projects'),
+                    onTap: () {
+                      setState(() {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const ProjectsScreen();
+                        }));
+                      });
+                    },
                   ),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                GestureDetector(
-                  child: const ProfileTile(title: 'Projects'),
-                  onTap: () {
-                    setState(() {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return const ProjectsScreen();
-                      }));
-                    });
-                  },
                 ),
                 SizedBox(
                   height: 10.h,
                 ),
-                GestureDetector(
-                  child: const ProfileTile(title: 'Services'),
-                  onTap: () {
-                    setState(() {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return const CategoriesScreen();
-                      }));
-                    });
-                  },
+                Material(
+                  child: GestureDetector(
+                    child: const ProfileTile(title: 'Services'),
+                    onTap: () {
+                      setState(() {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const CategoriesScreen();
+                        }));
+                      });
+                    },
+                  ),
                 ),
                 SizedBox(
                   height: 10.h,
                 ),
-                GestureDetector(
-                  child: const ProfileTile(title: 'Lectures'),
-                  onTap: () {
-                    setState(() {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return const LectureScreen();
-                      }));
-                    });
-                  },
+                Material(
+                  child: GestureDetector(
+                    child: const ProfileTile(title: 'Lectures'),
+                    onTap: () {
+                      setState(() {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const LectureScreen();
+                        }));
+                      });
+                    },
+                  ),
                 ),
                 SizedBox(
                   height: 20.h,
                 ),
-                Container(
-                  width: double.infinity.w,
-                  height: 48.h,
-                  padding: EdgeInsets.symmetric(horizontal: 10.w),
-                  decoration: ShapeDecoration(
-                    gradient: const LinearGradient(
-                      begin: Alignment(0.00, -1.00),
-                      end: Alignment(0, 1),
-                      colors: [Color(0xFF547CAB), Color(0xFF8BC1FF)],
+                Material(
+                  child: Container(
+                    width: double.infinity.w,
+                    height: 48.h,
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    decoration: ShapeDecoration(
+                      gradient: const LinearGradient(
+                        begin: Alignment(0.00, -1.00),
+                        end: Alignment(0, 1),
+                        colors: [Color(0xFF547CAB), Color(0xFF8BC1FF)],
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'Connect Creator',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w400,
-                        height: 0,
+                    child: const Center(
+                      child: Text(
+                        'Connect Creator',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w400,
+                          height: 0,
+                        ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 20.h,)
+                SizedBox(
+                  height: 20.h,
+                )
               ],
             ),
           ),

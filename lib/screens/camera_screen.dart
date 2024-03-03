@@ -1,81 +1,86 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CameraScreen extends StatefulWidget {
-  const CameraScreen({super.key});
-
   @override
-  State<CameraScreen> createState() => _CameraScreenState();
+  _CameraScreenState createState() => _CameraScreenState();
 }
 
 class _CameraScreenState extends State<CameraScreen> {
-  late List<CameraDescription> cameras;
-  late CameraController cameraController;
+late CameraController cameraController; // Define the variable with 'late'
 
   @override
   void initState() {
-    startCamera();
     super.initState();
-  }
-
-  void startCamera() async {
-    cameras = await availableCameras();
-    cameraController = CameraController(
-      cameras[0],
-      ResolutionPreset.high,
-      enableAudio: false,
-    );
-    await cameraController.initialize().then((value) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-    }).catchError((e) {
-      print(e);
+    // Call initializeCamera using SchedulerBinding.addPostFrameCallback
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      initializeCamera();
     });
   }
 
-  @override
-  void dispose() {
-    cameraController.dispose();
-    super.dispose();
+  Future<void> initializeCamera() async {
+    final cameras = await availableCameras();
+    final firstCamera = cameras.first;
+
+    cameraController =  CameraController(
+      firstCamera,
+      ResolutionPreset.medium,
+    );
+
+    await cameraController.initialize();
+    if (!mounted) {
+      return;
+    }
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    if (cameraController.value.isInitialized) {
-      return Scaffold(
-        body: Stack(
-          children: [
-            CameraPreview(cameraController),
-            Padding(
-              padding: EdgeInsets.only(bottom: 20.h),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: FloatingActionButton(
-                    child: const Icon(
-                      Icons.camera_alt_outlined,
-                      color: Colors.white,
-                    ),
-                    backgroundColor: const Color(0xFF547CAB),
-                    onPressed: () {
-                      cameraController.takePicture().then((XFile? file) {
-                        if (mounted) {
-                          if (file != null) {
-                            print('Picture saved ');
-                          }
-                        }
-                      });
-                    }),
-              ),
-            )
-          ],
-        ),
-      );
-    } else {
-      return const SizedBox();
+    // Check if cameraController is null before accessing it
+    if (cameraController == null || !cameraController.value.isInitialized) {
+      return Container(); // Or you can return a loading indicator
     }
+
+    return Scaffold(
+      body: Stack(
+        children: [
+          CameraPreview(cameraController),
+          Padding(
+            padding: EdgeInsets.only(bottom: 20.h),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: FloatingActionButton(
+                child: const Icon(
+                  Icons.camera_alt_outlined,
+                  color: Colors.white,
+                ),
+                backgroundColor: const Color(0xFF547CAB),
+                onPressed: () {
+                  takePicture(); // Call takePicture function when the button is pressed
+                },
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  void takePicture() async {
+    try {
+      final XFile? file = await cameraController.takePicture();
+      if (file != null) {
+        print('Picture saved');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  @override
+  void dispose() {
+    cameraController.dispose(); // Dispose the camera controller
+    super.dispose();
   }
 }

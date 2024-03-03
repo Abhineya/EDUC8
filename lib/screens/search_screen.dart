@@ -237,6 +237,7 @@ class SearchTile extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
                   title,
@@ -246,9 +247,9 @@ class SearchTile extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(
-                  height: 5.h,
-                ),
+                // SizedBox(
+                //   height: 5.h,
+                // ),
                 Text(
                   name,
                   style: TextStyle(
@@ -266,9 +267,9 @@ class SearchTile extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                SizedBox(
-                  height: 10.h,
-                ),
+                // SizedBox(
+                //   height: 10.h,
+                // ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

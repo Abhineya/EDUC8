@@ -4,7 +4,9 @@ import 'package:educ8/auth/firebase_auth_services.dart';
 import 'package:educ8/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -50,14 +52,15 @@ class _LoginScreenState extends State<LoginScreen>
   }
 
   void _signUp() async {
-    String username = _usernameController.text;
+    // Remove the unused variable 'username'
+    // String username = _usernameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
 
     User? user = await _auth.signUpWithEmailAndPassword(email, password);
 
     if (user != null) {
-      // ignore: avoid_print
+   
       print('User is successfully created');
       // ignore: use_build_context_synchronously
       Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -82,6 +85,24 @@ class _LoginScreenState extends State<LoginScreen>
       }));
     } else {
       print('Some error occured while login');
+    }
+  }
+
+  signInWithGoogle() async {
+    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+    UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+    print(userCredential.user?.displayName);
+    if (userCredential.user != null) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (BuildContext context) {
+        return const HomeScreen();
+      }));
     }
   }
 
@@ -313,16 +334,22 @@ class _LoginScreenState extends State<LoginScreen>
                                       child: Image.asset(
                                           'assets/images/facebook.png'),
                                     ),
-                                    Container(
-                                      height: 60.h,
-                                      width: 88.w,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(16.r),
-                                          border: Border.all(
-                                              color: const Color(0xffEEEEEE))),
-                                      child: Image.asset(
-                                          'assets/images/google.png'),
+                                    GestureDetector(
+                                      onTap:() async{
+                                          signInWithGoogle();
+                                      },
+                                      child: Container(
+                                        height: 60.h,
+                                        width: 88.w,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(16.r),
+                                            border: Border.all(
+                                                color:
+                                                    const Color(0xffEEEEEE))),
+                                        child: Image.asset(
+                                            'assets/images/google.png'),
+                                      ),
                                     ),
                                     Container(
                                       height: 60.h,

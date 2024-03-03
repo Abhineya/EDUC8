@@ -1,3 +1,5 @@
+// import 'dart:js_interop_unsafe';
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseAuthService {
@@ -26,4 +28,6 @@ class FirebaseAuthService {
     }
     return null;
   }
+
+ 
 }
