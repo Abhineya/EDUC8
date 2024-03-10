@@ -34,6 +34,22 @@ class _PostScreenState extends State<PostScreen> {
               SizedBox(
                 height: 20.h,
               ),
+              MyFeedCard(
+                title: 'Raunak Jha',
+                imageUrl: 'assets/images/raunakpost.png',
+                profileimageUrl: 'assets/images/raunak.png',
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              MyFeedCard(
+                title: 'Apurva Ambulkar',
+                imageUrl: 'assets/images/apurvapost.png',
+                profileimageUrl: 'assets/images/apurva.png',
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
             ],
           ),
         ),
@@ -94,7 +110,7 @@ class _MyFeedCardState extends State<MyFeedCard> {
                   ),
                 ),
                 const Spacer(),
-                const Icon(Icons.view_array_rounded)
+                const Icon(Icons.more_vert)
               ],
             ),
           ),

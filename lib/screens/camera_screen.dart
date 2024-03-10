@@ -8,22 +8,21 @@ class CameraScreen extends StatefulWidget {
 }
 
 class _CameraScreenState extends State<CameraScreen> {
-late CameraController cameraController; // Define the variable with 'late'
+  late CameraController cameraController;
+
+  late Future<void> _initializeCamera;
 
   @override
   void initState() {
     super.initState();
-    // Call initializeCamera using SchedulerBinding.addPostFrameCallback
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
-      initializeCamera();
-    });
+    _initializeCamera = initializeCamera();
   }
 
   Future<void> initializeCamera() async {
     final cameras = await availableCameras();
     final firstCamera = cameras.first;
 
-    cameraController =  CameraController(
+    cameraController = CameraController(
       firstCamera,
       ResolutionPreset.medium,
     );
@@ -37,35 +36,57 @@ late CameraController cameraController; // Define the variable with 'late'
 
   @override
   Widget build(BuildContext context) {
-    // Check if cameraController is null before accessing it
-    if (cameraController == null || !cameraController.value.isInitialized) {
-      return Container(); // Or you can return a loading indicator
-    }
-
     return Scaffold(
-      body: Stack(
-        children: [
-          CameraPreview(cameraController),
-          Padding(
-            padding: EdgeInsets.only(bottom: 20.h),
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: FloatingActionButton(
-                child: const Icon(
-                  Icons.camera_alt_outlined,
-                  color: Colors.white,
-                ),
-                backgroundColor: const Color(0xFF547CAB),
-                onPressed: () {
-                  takePicture(); // Call takePicture function when the button is pressed
-                },
-              ),
-            ),
-          )
-        ],
+      body: FutureBuilder<void>(
+        future: _initializeCamera,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return const Center(child: Text('An error occurred!'));
+          } else {
+            return Stack(
+              children: [
+                CameraPreview(cameraController),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 20.h),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(const Color(0xFF547CAB)),
+                      ),
+                      onPressed: () {
+                        takePicture();
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 5.h),
+                        child: const Icon(
+                          Icons.camera_alt_outlined,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            );
+          }
+        },
       ),
     );
   }
+// FloatingActionButton(
+//                       child: Icon(
+//                         Icons.camera_alt_outlined,
+//                         color: Colors.white,
+//                       ),
+//
+//                       onPressed: () {
+//                         takePicture();
+//                       },
+//                     ),
 
   void takePicture() async {
     try {
@@ -80,7 +101,7 @@ late CameraController cameraController; // Define the variable with 'late'
 
   @override
   void dispose() {
-    cameraController.dispose(); // Dispose the camera controller
+    cameraController.dispose();
     super.dispose();
   }
 }

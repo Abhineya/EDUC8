@@ -1,7 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:educ8/firebase_options.dart';
-
-import 'package:educ8/screens/splash_screen.dart';
+import 'package:educ8/screens/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,10 +25,9 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       builder: (context, child) {
         return const MaterialApp(
-          title: 'EDUC8',
-          debugShowCheckedModeBanner: false,
-          home: SplashScreen(),
-        );
+            title: 'EDUC8',
+            debugShowCheckedModeBanner: false,
+            home: LoginScreen());
       },
     );
   }

@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:educ8/screens/camera_screen.dart';
 import 'package:educ8/screens/categories_screen.dart';
+import 'package:educ8/screens/courses_screen.dart';
 import 'package:educ8/screens/lecture_screen.dart';
 import 'package:educ8/screens/post_screen.dart';
 import 'package:educ8/screens/profile_screen.dart';
@@ -25,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const PostScreen(),
     const SearchScreen(),
     CameraScreen(),
-    const SearchScreen(),
+    const CoursesScreen(),
     const ProfileScreen()
   ];
 
