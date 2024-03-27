@@ -32,31 +32,31 @@ class _CoursesScreenState extends State<CoursesScreen> {
               SizedBox(
                 height: 20.h,
               ),
-              YoutubePlayerThumbnailExample(
+              const YoutubePlayerThumbnailExample(
                 videoId: 'lFqxenB9CX8',
               ),
               SizedBox(
                 height: 20.h,
               ),
-              YoutubePlayerThumbnailExample(
+              const YoutubePlayerThumbnailExample(
                 videoId: 'JDOXKqF60RQ',
               ),
               SizedBox(
                 height: 20.h,
               ),
-              YoutubePlayerThumbnailExample(
+              const YoutubePlayerThumbnailExample(
                 videoId: '5_5oE5lgrhw&list=PLu0W_9lII9ahIappRPN0MCAgtOu3lQjQi',
               ),
               SizedBox(
                 height: 20.h,
               ),
-              YoutubePlayerThumbnailExample(
+              const YoutubePlayerThumbnailExample(
                 videoId: 'BsDoLVMnmZs',
               ),
               SizedBox(
                 height: 20.h,
               ),
-              YoutubePlayerThumbnailExample(
+              const YoutubePlayerThumbnailExample(
                 videoId: 'z0n1aQ3IxWI',
               ),
             ],
@@ -90,7 +90,7 @@ class _YoutubePlayerThumbnailExampleState
     super.initState();
     _controller = YoutubePlayerController(
       initialVideoId: widget.videoId,
-      flags: YoutubePlayerFlags(
+      flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: false,
       ),
@@ -114,7 +114,7 @@ class _YoutubePlayerThumbnailExampleState
             controller: _controller,
             showVideoProgressIndicator: true,
             progressIndicatorColor: Colors.blueAccent,
-            progressColors: ProgressBarColors(
+            progressColors: const ProgressBarColors(
               playedColor: Colors.blue,
               handleColor: Colors.blueAccent,
             ),

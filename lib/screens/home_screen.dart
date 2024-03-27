@@ -7,6 +7,7 @@ import 'package:educ8/screens/post_screen.dart';
 import 'package:educ8/screens/profile_screen.dart';
 import 'package:educ8/screens/projects_screen.dart';
 import 'package:educ8/screens/search_screen.dart';
+import 'package:educ8/screens/upload_photo_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -25,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     const PostScreen(),
     const SearchScreen(),
-    CameraScreen(),
+    PickImage(),
     const CoursesScreen(),
     const ProfileScreen()
   ];

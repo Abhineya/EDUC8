@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 
 class CameraScreen extends StatefulWidget {
   @override
@@ -77,27 +78,23 @@ class _CameraScreenState extends State<CameraScreen> {
       ),
     );
   }
-// FloatingActionButton(
-//                       child: Icon(
-//                         Icons.camera_alt_outlined,
-//                         color: Colors.white,
-//                       ),
-//
-//                       onPressed: () {
-//                         takePicture();
-//                       },
-//                     ),
-
-  void takePicture() async {
-    try {
-      final XFile? file = await cameraController.takePicture();
-      if (file != null) {
-        print('Picture saved');
+ void takePicture() async {
+  try {
+    final XFile? file = await cameraController.takePicture();
+    if (file != null) {
+      // Save the image to the gallery
+      final savedFile = await GallerySaver.saveImage(file.path);
+      if (savedFile != null) {
+        print('Picture saved to gallery');
+      } else {
+        print('Failed to save picture to gallery');
       }
-    } catch (e) {
-      print('Error: $e');
     }
+  } catch (e) {
+    print('Error: $e');
   }
+}
+
 
   @override
   void dispose() {
